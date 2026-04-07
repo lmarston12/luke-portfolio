@@ -1,0 +1,52 @@
+---
+title: "Applyist: An AI-Powered Job Application Assistant"
+slug: applyist
+company: Side Project
+role: Builder
+date: "2026"
+category: AI Product
+summary: "Built a full-stack application that uses Claude to tailor resumes, generate cover letters, and parse job listings — from idea to live product."
+metrics:
+  - value: "6"
+    label: "AI-powered features shipped"
+  - value: "Claude"
+    label: "Anthropic API integration"
+  - value: "Live"
+    label: "Deployed and functional"
+featured: true
+order: 2
+---
+
+## The Problem
+
+Tailoring a resume for every job application is tedious but necessary. Most people either send the same generic resume everywhere (lower response rates) or spend 30-45 minutes customizing each one (unsustainable at volume). Cover letters are even worse — high effort, low differentiation.
+
+I wanted to build a tool that handles the repetitive customization work while keeping the human in control of the final output.
+
+## What I Built
+
+Applyist is a full-stack web application built with React, Supabase, and the Anthropic Claude API. The core loop:
+
+1. **Upload your base resume** (PDF upload with text extraction)
+2. **Add a job application** (paste the description or parse it from a URL)
+3. **Generate a tailored resume** — Claude analyzes the job description and rewrites relevant bullets while preserving your authentic voice
+4. **Generate a cover letter** — uses the tailored resume + job context to produce a conversational, role-specific letter
+5. **Edit inline and download as PDF** — every generated output is editable before export
+
+### Technical decisions that mattered
+
+**Claude API with tool_use for structured output:** Rather than asking the LLM to return raw text and parsing it, I used Claude's tool_use feature to get structured JSON responses (experience entries, skills categories, tailored bullet indices). This made the output predictable and directly renderable.
+
+**Prompt engineering for tone:** The default AI writing voice is stiff and buzzword-heavy. I iterated extensively on system prompts to produce natural, first-person writing. Specific bans: no em dashes, no "spearheaded," no "passionate," no "results-driven." The prompt tells Claude to keep the candidate's authentic voice.
+
+**Edge Functions for AI calls:** All AI processing runs in Supabase Edge Functions (Deno), keeping API keys server-side and enabling proper error handling for rate limits and billing issues.
+
+**Job URL parsing:** Built a pipeline using Jina AI Reader to fetch job page content, then Claude to extract the job description, company, and role title. Handles most job boards; graceful fallback to manual paste when it can't.
+
+## The Outcome
+
+Applyist is live and functional — I use it for my own job applications. The project demonstrates hands-on AI product development: not just prompting a model, but building the full system around it (auth, storage, structured output, inline editing, PDF generation, error handling).
+
+## What I Learned
+
+Building with LLMs taught me that the hard part isn't the API call — it's everything around it. Prompt engineering is product design. Structured output is UX. And the "last mile" (inline editing, PDF formatting, error states) takes 80% of the development time.

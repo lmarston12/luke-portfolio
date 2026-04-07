@@ -1,65 +1,78 @@
-import Image from "next/image";
+import { Container } from "@/components/Container";
+import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { getAllCaseStudies } from "@/lib/mdx";
 
-export default function Home() {
+const competencies = [
+  {
+    title: "Product Strategy",
+    description:
+      "Defining vision, roadmaps, and OKRs for products from 0-to-1 through growth. Aligning engineering, design, legal, and leadership around shared outcomes.",
+  },
+  {
+    title: "AI / ML Product Development",
+    description:
+      "Building AI-powered products with LLMs, structured data extraction, and prompt engineering. Hands-on experience with Claude API, model evaluation, and adoption strategy.",
+  },
+  {
+    title: "Full-Stack Building",
+    description:
+      "Shipping real products end-to-end: React, Next.js, Supabase, Edge Functions, Tailwind. Not just speccing — building, deploying, and iterating.",
+  },
+];
+
+export default function HomePage() {
+  const caseStudies = getAllCaseStudies().filter((s) => s.featured);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero */}
+      <section className="py-20 sm:py-28">
+        <Container width="narrow">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-6">
+            Senior PM building AI-powered products in financial services.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-text-secondary leading-relaxed max-w-[600px]">
+            I turn complex problems into shipped products. Currently leading
+            enterprise AI at Northwestern Mutual. Previously building data
+            platforms, BI tools, and healthcare tech.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </Container>
+      </section>
+
+      {/* Featured Work */}
+      <section className="pb-20">
+        <Container>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
+            Featured Work
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {caseStudies.map((study) => (
+              <CaseStudyCard key={study.slug} {...study} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* What I Do */}
+      <section className="py-20 border-t border-border">
+        <Container>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
+            What I Do
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {competencies.map((c) => (
+              <div key={c.title}>
+                <h3 className="text-base font-semibold text-foreground mb-2">
+                  {c.title}
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {c.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
