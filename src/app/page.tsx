@@ -15,7 +15,7 @@ const competencies = [
       "Defining vision, roadmaps, and OKRs for products from 0-to-1 through growth. Aligning engineering, design, legal, and leadership around shared outcomes.",
   },
   {
-    title: "AI / ML Product Development",
+    title: "AI Product Development",
     description:
       "Building AI-powered products with LLMs, structured data extraction, and prompt engineering. Hands-on experience with Claude API, model evaluation, and adoption strategy.",
   },
@@ -42,7 +42,7 @@ export default function HomePage() {
           <HeroReveal delay={0.15}>
             <p className="text-lg text-text-secondary leading-relaxed max-w-[600px]">
               I turn complex problems into shipped products. Currently leading
-              enterprise AI at Northwestern Mutual. Previously building data
+              enterprise AI product development initiatives at Northwestern Mutual. Previously building data
               platforms, BI tools, and healthcare tech.
             </p>
           </HeroReveal>
