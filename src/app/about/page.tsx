@@ -76,20 +76,19 @@ export default function AboutPage() {
                 people actually use.
               </p>
               <p>
-                Outside of work, I build things. Applyist is an AI-powered job
+                Outside of work, I continue to build things and try to keep up with the rapidly changing tech/Product Management space. Applyist is an AI-powered job
                 application assistant I&apos;m building with React, Supabase, and the
                 Claude API. I&apos;m also working on Headway, a financial goal
-                tracking app. I&apos;ve built websites for small businesses including
-                a restaurant consulting firm and a livestock nutrition company.
+                tracking app. I&apos;ve built websites for multiple small businesses including
+                a restaurant consulting firm and a dairy cattle nutrition supplement company.
               </p>
               <p>
-                I studied Industrial Engineering at Iowa State, hold a Lean Six
-                Sigma Green Belt from Oxford, and mentor product managers through
+                I studied Industrial Engineering at Iowa State and mentor students in product managers through
                 the PM Club at NYU.
               </p>
               <p>
                 When I&apos;m not building products, I&apos;m probably walking my
-                goldendoodle, optimizing travel points, or watching the Yankees.
+                goldendoodle, traveling by optimizing travel points, staying active, or watching one of my favorite teams.
               </p>
             </div>
           </FadeIn>
