@@ -1,6 +1,12 @@
 import { Container } from "@/components/Container";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { getAllCaseStudies } from "@/lib/mdx";
+import { HeroReveal } from "@/components/motion/HeroReveal";
+import { FadeIn } from "@/components/motion/FadeIn";
+import {
+  StaggerChildren,
+  StaggerItem,
+} from "@/components/motion/StaggerChildren";
 
 const competencies = [
   {
@@ -28,49 +34,59 @@ export default function HomePage() {
       {/* Hero */}
       <section className="py-20 sm:py-28">
         <Container width="narrow">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-6">
-            Senior PM building AI-powered products in financial services.
-          </h1>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-[600px]">
-            I turn complex problems into shipped products. Currently leading
-            enterprise AI at Northwestern Mutual. Previously building data
-            platforms, BI tools, and healthcare tech.
-          </p>
+          <HeroReveal>
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-6">
+              Senior PM building AI-powered products in financial services.
+            </h1>
+          </HeroReveal>
+          <HeroReveal delay={0.15}>
+            <p className="text-lg text-text-secondary leading-relaxed max-w-[600px]">
+              I turn complex problems into shipped products. Currently leading
+              enterprise AI at Northwestern Mutual. Previously building data
+              platforms, BI tools, and healthcare tech.
+            </p>
+          </HeroReveal>
         </Container>
       </section>
 
       {/* Featured Work */}
       <section className="pb-20">
         <Container>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
-            Featured Work
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FadeIn>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
+              Featured Work
+            </h2>
+          </FadeIn>
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {caseStudies.map((study) => (
-              <CaseStudyCard key={study.slug} {...study} />
+              <StaggerItem key={study.slug}>
+                <CaseStudyCard {...study} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </Container>
       </section>
 
       {/* What I Do */}
       <section className="py-20 border-t border-border">
         <Container>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
-            What I Do
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <FadeIn>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
+              What I Do
+            </h2>
+          </FadeIn>
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {competencies.map((c) => (
-              <div key={c.title}>
+              <StaggerItem key={c.title}>
                 <h3 className="text-base font-semibold text-foreground mb-2">
                   {c.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed">
                   {c.description}
                 </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </Container>
       </section>
     </>

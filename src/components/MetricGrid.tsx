@@ -1,4 +1,5 @@
 import { MetricCard } from "./MetricCard";
+import { CountUpMetric } from "./motion/CountUpMetric";
 
 interface Metric {
   value: string;
@@ -7,9 +8,12 @@ interface Metric {
 
 interface MetricGridProps {
   metrics: Metric[];
+  animated?: boolean;
 }
 
-export function MetricGrid({ metrics }: MetricGridProps) {
+export function MetricGrid({ metrics, animated = false }: MetricGridProps) {
+  const Card = animated ? CountUpMetric : MetricCard;
+
   return (
     <div
       className={`grid gap-4 my-8 ${
@@ -21,7 +25,7 @@ export function MetricGrid({ metrics }: MetricGridProps) {
       }`}
     >
       {metrics.map((metric) => (
-        <MetricCard key={metric.label} {...metric} />
+        <Card key={metric.label} {...metric} />
       ))}
     </div>
   );

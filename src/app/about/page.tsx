@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/Container";
-import { Timeline } from "@/components/Timeline";
+import { AnimatedTimeline } from "@/components/motion/AnimatedTimeline";
+import { HeroReveal } from "@/components/motion/HeroReveal";
+import { FadeIn } from "@/components/motion/FadeIn";
 
 export const metadata: Metadata = {
   title: "About",
@@ -50,46 +53,64 @@ export default function AboutPage() {
   return (
     <section className="py-16">
       <Container width="narrow">
-        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-          About
-        </h1>
+        <HeroReveal>
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-8">
+            About
+          </h1>
+        </HeroReveal>
 
-        <div className="prose mb-16">
-          <p>
-            I&apos;m a Senior Product Manager in New York building AI-powered products
-            in financial services. Right now I lead an enterprise AI platform at
-            Northwestern Mutual that automates how financial advisors document
-            client meetings — from Zoom recordings to structured data that feeds
-            directly into planning systems.
-          </p>
-          <p>
-            Before that I worked across data platforms, BI tools, healthcare
-            technology, and medical devices. The thread through all of it:
-            taking messy, complex problems and turning them into products people
-            actually use.
-          </p>
-          <p>
-            Outside of work, I build things. Applyist is an AI-powered job
-            application assistant I&apos;m building with React, Supabase, and the
-            Claude API. I&apos;m also working on Headway, a financial goal tracking
-            app. I&apos;ve built websites for small businesses including a restaurant
-            consulting firm and a livestock nutrition company.
-          </p>
-          <p>
-            I studied Industrial Engineering at Iowa State, hold a Lean Six Sigma
-            Green Belt from Oxford, and mentor product managers through the PM
-            Club at NYU.
-          </p>
-          <p>
-            When I&apos;m not building products, I&apos;m probably walking my goldendoodle,
-            optimizing travel points, or watching the Yankees.
-          </p>
+        <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-12 mb-16">
+          <FadeIn className="md:flex-1">
+            <div className="prose">
+              <p>
+                I&apos;m a Senior Product Manager in New York building AI-powered
+                products in financial services. Right now I lead an enterprise AI
+                platform at Northwestern Mutual that automates how financial
+                advisors document client meetings — from Zoom recordings to
+                structured data that feeds directly into planning systems.
+              </p>
+              <p>
+                Before that I worked across data platforms, BI tools, healthcare
+                technology, and medical devices. The thread through all of it:
+                taking messy, complex problems and turning them into products
+                people actually use.
+              </p>
+              <p>
+                Outside of work, I build things. Applyist is an AI-powered job
+                application assistant I&apos;m building with React, Supabase, and the
+                Claude API. I&apos;m also working on Headway, a financial goal
+                tracking app. I&apos;ve built websites for small businesses including
+                a restaurant consulting firm and a livestock nutrition company.
+              </p>
+              <p>
+                I studied Industrial Engineering at Iowa State, hold a Lean Six
+                Sigma Green Belt from Oxford, and mentor product managers through
+                the PM Club at NYU.
+              </p>
+              <p>
+                When I&apos;m not building products, I&apos;m probably walking my
+                goldendoodle, optimizing travel points, or watching the Yankees.
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.15} className="md:w-[280px] shrink-0">
+            <Image
+              src="/images/luke-headshot.png"
+              alt="Luke Marston"
+              width={280}
+              height={350}
+              className="rounded-lg w-full"
+            />
+          </FadeIn>
         </div>
 
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
-          Career Timeline
-        </h2>
-        <Timeline entries={career} />
+        <FadeIn>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-secondary mb-8">
+            Career Timeline
+          </h2>
+        </FadeIn>
+        <AnimatedTimeline entries={career} />
       </Container>
     </section>
   );
