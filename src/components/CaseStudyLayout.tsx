@@ -68,7 +68,7 @@ export function CaseStudyLayout({
         <div className="border-t border-border pt-8">
           {metrics.length > 1 && (
             <FadeIn>
-              <MetricGrid metrics={metrics} animated />
+              <MetricGrid metrics={metrics.slice(1)} animated />
             </FadeIn>
           )}
 
