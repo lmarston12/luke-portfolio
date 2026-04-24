@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useInView, animate } from "framer-motion";
 
 interface CountUpMetricProps {
@@ -23,11 +23,16 @@ function parseValue(value: string): {
 export function CountUpMetric({ value, label }: CountUpMetricProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const parsed = parseValue(value);
+  const parsed = useMemo(() => parseValue(value), [value]);
   const [display, setDisplay] = useState(parsed ? `${parsed.prefix}0${parsed.suffix}` : value);
+  const hasAnimated = useRef(false);
 
+  // Run the count-up exactly once after the card enters view.
+  // Guarded by hasAnimated so parent re-renders (which can change
+  // effect deps) don't restart the animation from 0 — the original bug.
   useEffect(() => {
-    if (!isInView || !parsed) return;
+    if (!isInView || !parsed || hasAnimated.current) return;
+    hasAnimated.current = true;
 
     const hasDecimal = value.includes(".") && parsed.suffix !== "%";
     const controls = animate(0, parsed.number, {
