@@ -1,0 +1,63 @@
+---
+title: "Headway: A Calm Financial Goal Tracker"
+slug: headway
+company: Side Project
+role: Builder
+date: "2026"
+category: Consumer Product
+summary: "Designed and built a goal-tracking app that replaces budgeting complexity with a simple, encouraging progress loop — including Stripe payments and automated email check-ins."
+metrics:
+  - value: "$5/mo"
+    label: "Headway Plus subscription tier"
+  - value: "6"
+    label: "Milestone stages in progress system"
+  - value: "Live"
+    label: "Shipped with payments & email"
+featured: false
+order: 3
+---
+
+## The Problem
+
+Most savings and goal-tracking apps fall into one of two traps. They're either too heavy — full budgeting tools like YNAB or Mint that require linking bank accounts and managing categories — or too gimmicky, with streaks, badges, and dopamine loops that punish missed days and burn out users.
+
+People who want to save for a specific thing (a trip, an emergency fund, a down payment) don't need a financial OS. They need a quiet, encouraging place to mark progress and feel it.
+
+## What I Built
+
+Headway is a lightweight web app with a single calm idea: progress adds up, even when it's slow. Users set one goal, log contributions over time, and watch a segmented progress bar move through six narrative stages from "Getting started" to "Goal reached." Think Domino's Pizza tracker, but for a financial goal.
+
+### Design decisions that shaped the product
+
+**Stage-based progress instead of raw percentages.** Numbers demotivate at low percentages — 5% feels like nothing. Named stages reframe small progress as meaningful. "Getting started" feels like a beginning, not a failure. The six stages (Getting started, Building momentum, Making real headway, Well on your way, Closing in, Goal reached) do the emotional work that numbers can't.
+
+**Manual contribution logging instead of bank linking.** I deliberately skipped Plaid and account linking to keep trust, scope, and cost low. More importantly, the act of manually logging a contribution is itself the engagement moment. It forces a small reflection: I made progress today.
+
+**Single active goal on the free tier.** Rather than throttling usage of an existing feature, the free tier forces focus on one goal. This creates a natural upgrade hook for Headway Plus ($5/mo) — multi-goal tracking — without making the free experience feel punished.
+
+**Calm tone throughout.** No streaks. No shame. Missed weeks don't reset anything. The only celebration is a subtle sunrise glow animation when crossing a milestone stage — chosen over confetti or badges to match the product's tone.
+
+### Monetization and re-engagement
+
+I integrated Stripe for Headway Plus subscriptions: checkout, customer portal, and webhooks for plan management. The upgrade path is gated on multi-goal tracking, not core functionality.
+
+For re-engagement, I built a weekly progress check-in email using Resend. It's opt-in and default on — one line ("You're 100% of the way to your goal") with a single CTA back to the app. No guilt, no pressure.
+
+### Iterating after dogfooding
+
+Several improvements shipped after using it myself:
+
+- The mobile log-progress modal was being clipped by the keyboard. Made dialogs scrollable with `max-h-[85vh]`.
+- The contribution input lacked a currency cue. Added a `$` prefix.
+- Milestone transitions felt invisible. Added the sunrise glow overlay.
+- The "Upgrade to Headway Plus" button overlapped the plan label on mobile. Switched to a responsive stack layout.
+
+## The Outcome
+
+Headway is live at [goalheadway.lovable.app](https://goalheadway.lovable.app). The project demonstrates consumer product thinking end-to-end: positioning a product in a crowded space, designing an engagement model that doesn't rely on guilt, building a monetization path that feels fair, and shipping the full stack (auth, payments, transactional email, mobile polish).
+
+## What I Learned
+
+The biggest takeaway was how much language matters in product design. The difference between showing "5%" and showing "Getting started" is entirely emotional, but it changes whether someone comes back. Small copy decisions shaped the entire product feel more than any visual design choice.
+
+I also got faster at prototyping with Lovable, which let me focus on product decisions instead of scaffolding. And integrating Resend for transactional email taught me how lightweight re-engagement infrastructure can be when you keep the scope tight — one email, one CTA, one purpose.
